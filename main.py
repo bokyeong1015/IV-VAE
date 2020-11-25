@@ -283,16 +283,18 @@ while count_epoch <= args.nEpoch:
         loss_train['iteration'] = iteration
 
         ########################################################
-        print('[eph %d/%d %d/%d] U modi_elbo %.2f | L modi_elbo %.2f acc %.1f' %
-                (count_epoch, args.nEpoch, count_batch, nBatchTotal_unsup, 
-                 loss_indi_unsup['elbo_modi'], loss_indi_sup['elbo_modi'], loss_indi_sup['acc_cls']))
-
         if args.unsupLearn != 1:
+            print('[eph %d/%d %d/%d] U modi_elbo %.2f | L modi_elbo %.2f acc %.1f' %
+                  (count_epoch, args.nEpoch, count_batch, nBatchTotal_unsup,
+                   loss_indi_unsup['elbo_modi'], loss_indi_sup['elbo_modi'], loss_indi_sup['acc_cls']))
             if count_sup != nBatchTotal_sup:
                 count_sup = count_sup + 1
             elif count_sup == nBatchTotal_sup:
                 count_sup = 1
-                shuffle_sup = torch.randperm(dataset_size_sup).long()  # starting from 0
+                shuffle_sup = torch.randperm(dataset_size_sup).long()
+        else:
+            print('[eph %d/%d %d/%d] U modi_elbo %.2f' %
+                  (count_epoch, args.nEpoch, count_batch, nBatchTotal_unsup, loss_indi_unsup['elbo_modi']))
 
         count_batch += 1
         iteration += 1
