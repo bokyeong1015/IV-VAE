@@ -385,7 +385,7 @@ if not os.path.isfile(os.path.join(args.save, 'evalTest_minVal_eph%d.pth' % eval
     eval_test_indi = elbo_decomposition_ivvae_catY(vae, test_loader_eval)
     eval_test = update_eval(eval_test, eval_test_indi, 0.0, 0.0, eval_epoch, eval_iter)
 
-    filename = os.path.join(args.save, 'evalTest_minVal_eph%d')
+    filename = os.path.join(args.save, 'evalTest_minVal_eph%d' % eval_epoch)
     torch.save(eval_test, filename + '.pth')
     sio.savemat(filename+'.mat', eval_test)
 
